@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>پنل کاربری | نام سایت</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="dashboard-body">
+    <header class="site-header">
+      <a class="brand" href="index.html"
+        ><span class="brand-mark">ن</span
+        ><span>نام سایت<span class="brand-sub"> | پنل کاربری</span></span></a
+      >
+      <nav class="main-nav">
+        <a href="index.html">صفحه اصلی</a><a href="detail.html">ثبت درخواست</a
+        ><a class="active" href="dashboard.html">پنل کاربری</a>
+      </nav>
+      <div class="header-actions">
+        <button class="btn btn-ghost" id="logout-btn">خروج از حساب</button>
+      </div>
+    </header>
+    <main class="container page-container">
+      <div class="dashboard-welcome">
+        <div>
+          <span class="eyebrow">فضای کاربری شما</span>
+          <h1>سلام، <span id="user-name">کاربر عزیز</span></h1>
+          <p>
+            از این بخش می‌توانید درخواست‌ها و فایل‌های مرتبط را مدیریت کنید.
+          </p>
+        </div>
+        <a href="detail.html" class="btn btn-primary">＋ ثبت درخواست جدید</a>
+      </div>
+      <div class="dashboard-stats">
+        <article class="stat-card">
+          <div>
+            <small>کل درخواست‌ها</small><strong id="total-requests">0</strong>
+          </div>
+        </article>
+        <article class="stat-card">
+          <div>
+            <small>در انتظار بررسی</small
+            ><strong id="pending-requests">0</strong>
+          </div>
+        </article>
+        <article class="stat-card">
+          <div><small>فایل‌های قابل دانلود</small><strong>0</strong></div>
+        </article>
+      </div>
+      <section class="panel-card requests-card">
+        <div class="card-heading">
+          <div>
+            <span class="eyebrow">سوابق شما</span>
+            <h2>درخواست‌های ثبت‌شده</h2>
+            <p>درخواست‌هایی که در این مرورگر ثبت کرده‌اید.</p>
+          </div>
+          <a href="detail.html" class="text-link">درخواست جدید ←</a>
+        </div>
+        <div id="requests-list" class="requests-list"></div>
+        <div id="empty-state" class="empty-state">
+          <h3>هنوز درخواستی ثبت نکرده‌اید</h3>
+          <p>
+            با ثبت اولین درخواست، اطلاعات آن در همین قسمت نمایش داده می‌شود.
+          </p>
+          <a href="detail.html" class="btn btn-primary">ثبت اولین درخواست</a>
+        </div>
+      </section>
+      <section class="panel-card downloads-card">
+        <div class="card-heading">
+          <div>
+            <span class="eyebrow">مرکز دانلود</span>
+            <h2>فایل‌ها و ابزارها</h2>
+            <p>
+              این قسمت برای نمایش فایل‌های اختصاصی هر سرویس در نظر گرفته شده
+              است.
+            </p>
+          </div>
+        </div>
+        <div class="download-placeholder">
+          <div>
+            <b>هنوز فایلی برای شما قرار نگرفته است</b>
+            <p>
+              پس از اتصال به API، فایل‌های مجاز در این بخش نمایش داده می‌شوند.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <a class="brand" href="index.html"
+          ><span class="brand-mark">ن</span><span>نام سایت</span></a
+        ><span>© ۱۴۰۵ نام سایت — نمونه اولیه پروژه آموزشی</span
+        ><a href="detail.html">ثبت درخواست</a>
+      </div>
+    </footer>
+    <div class="toast" id="toast" role="status"></div>
+    <script src="js/app.js" defer></script>
+    <script src="js/dashboard.js" defer></script>
+  </body>
+</html>

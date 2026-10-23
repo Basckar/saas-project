@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>جزئیات سرویس | نام سایت</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html"
+        ><span class="brand-mark">ن</span
+        ><span>نام سایت<span class="brand-sub"> | خدمات هوشمند</span></span></a
+      >
+      <nav class="main-nav">
+        <a href="index.html">صفحه اصلی</a
+        ><a class="active" href="detail.html">جزئیات سرویس</a>
+      </nav>
+      <div class="header-actions">
+        <a class="btn btn-ghost desktop-only" href="dashboard.html"
+          >پنل کاربری</a
+        ><button class="btn btn-primary" data-open-login>ورود به حساب ←</button>
+      </div>
+    </header>
+    <main class="container page-container">
+      <div class="breadcrumbs">
+        <a href="index.html">صفحه اصلی</a><span> / </span
+        ><span>جزئیات سرویس</span>
+      </div>
+      <section class="detail-hero">
+        <div>
+          <span class="eyebrow">جزئیات و ثبت درخواست</span>
+          <h1>پنل مدیریت کسب‌وکار</h1>
+          <p>
+            مشخصات اولیه را ثبت کنید تا درخواست شما برای بررسی آماده شود. این
+            فرم در نسخه بعدی به API متصل خواهد شد.
+          </p>
+          <div class="detail-tags">
+            <span> راه‌اندازی ساده</span><span> پشتیبانی از چند کاربر</span
+            ><span> مدیریت متمرکز</span>
+          </div>
+        </div>
+        <div class="detail-price">
+          <small>قیمت پایه نمونه</small
+          ><strong>۲,۵۰۰,۰۰۰ <small>تومان</small></strong
+          ><span>قیمت نهایی پس از بررسی مشخص می‌شود.</span>
+        </div>
+      </section>
+      <div class="detail-layout">
+        <section class="panel-card form-card">
+          <div class="card-heading">
+            <div>
+              <span class="eyebrow">فرم اطلاعات</span>
+              <h2>ثبت درخواست سرویس</h2>
+              <p>لطفاً پنج فیلد زیر را تکمیل کنید.</p>
+            </div>
+            <span class="step-counter">۰۱ / ۰۱</span>
+          </div>
+          <form id="request-form" class="request-form">
+            <div class="field">
+              <label for="full-name">نام و نام خانوادگی <span>*</span></label
+              ><input
+                id="full-name"
+                name="fullName"
+                type="text"
+                placeholder="نام کامل خود را وارد کنید"
+                required
+                minlength="3"
+                maxlength="80" /><small>نوع داده: متن</small>
+            </div>
+            <div class="field">
+              <label for="phone">شماره موبایل <span>*</span></label
+              ><input
+                id="phone"
+                name="phone"
+                type="tel"
+                placeholder="09123456789"
+                required
+                pattern="[0-9۰-۹]{10,11}"
+                maxlength="11" /><small>نوع داده: عددی</small>
+            </div>
+            <div class="field">
+              <label for="start-date">تاریخ شروع مدنظر <span>*</span></label
+              ><input
+                id="start-date"
+                name="startDate"
+                type="date"
+                required /><small
+                >تاریخ به‌صورت استاندارد برای اتصال به API ذخیره می‌شود.</small
+              >
+            </div>
+            <div class="field">
+              <label for="budget">بودجه مدنظر (تومان) <span>*</span></label>
+              <div class="input-suffix">
+                <input
+                  id="budget"
+                  name="budget"
+                  type="text"
+                  inputmode="numeric"
+                  placeholder="مثلاً ۲,۵۰۰,۰۰۰"
+                  autocomplete="off"
+                  required /><span>تومان</span>
+              </div>
+              <small id="budget-words" class="number-words"
+                >مبلغ به حروف: —</small
+              >
+            </div>
+            <div class="field">
+              <label for="users-count"
+                >تعداد کاربران موردنیاز <span>*</span></label
+              >
+              <div class="input-suffix">
+                <input
+                  id="users-count"
+                  name="usersCount"
+                  type="text"
+                  inputmode="numeric"
+                  placeholder="مثلاً ۱۲"
+                  autocomplete="off"
+                  required /><span>نفر</span>
+              </div>
+              <small id="users-words" class="number-words"
+                >تعداد به حروف: —</small
+              >
+            </div>
+            <div class="form-alert" id="form-error" hidden></div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary btn-large">
+                ثبت اطلاعات درخواست</button
+              ><span class="privacy-note"
+                >اطلاعات شما در این نسخه فقط در همین مرورگر ذخیره می‌شود.</span
+              >
+            </div>
+          </form>
+        </section>
+        <aside class="detail-aside">
+          <div class="panel-card aside-card">
+            <div class="aside-icon">✦</div>
+            <h3>بعد از ثبت چه می‌شود؟</h3>
+            <ul class="check-list">
+              <li>اطلاعات فرم بررسی می‌شود.</li>
+              <li>درخواست در پنل کاربری نمایش داده می‌شود.</li>
+              <li>در نسخه نهایی، وضعیت از API دریافت خواهد شد.</li>
+            </ul>
+          </div>
+          <div class="help-card">
+            <span>نیاز به راهنمایی دارید؟</span>
+            <p>در این نسخه آموزشی، فرم برای نمایش جریان کار آماده شده است.</p>
+            <a href="index.html">بازگشت به صفحه اصلی ←</a>
+          </div>
+        </aside>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <a class="brand" href="index.html"
+          ><span class="brand-mark">ن</span><span>نام سایت</span></a
+        ><span>© ۱۴۰۵ نام سایت — نمونه اولیه پروژه آموزشی</span
+        ><a href="dashboard.html">پنل کاربری</a>
+      </div>
+    </footer>
+    <div class="modal-backdrop" id="login-modal" aria-hidden="true">
+      <section
+        class="login-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="login-title">
+        <div class="modal-brand brand-mark">ن</div>
+        <span class="eyebrow">خوش آمدید</span>
+        <h2 id="login-title">ورود به حساب کاربری</h2>
+        <p class="modal-subtitle">برای ادامه، اطلاعات حساب خود را وارد کنید.</p>
+        <form id="login-form">
+          <label for="login-phone">شماره موبایل</label
+          ><input
+            id="login-phone"
+            name="phone"
+            type="tel"
+            placeholder="شماره موبایل"
+            required /><label for="login-password">رمز عبور</label
+          ><input
+            id="login-password"
+            name="password"
+            type="password"
+            placeholder="رمز عبور"
+            required
+            minlength="4" />
+          <div class="form-note">
+            نسخه نمایشی: هر شماره و رمز عبور ۴ کاراکتری قابل استفاده است.
+          </div>
+          <button class="btn btn-primary btn-full" type="submit">
+            ورود به پنل ←
+          </button>
+        </form>
+      </section>
+    </div>
+    <div class="toast" id="toast" role="status"></div>
+    <script src="js/app.js" defer></script>
+    <script src="js/login.js" defer></script>
+    <script src="js/detail.js" defer></script>
+  </body>
+</html>
