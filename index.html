@@ -9,34 +9,7 @@
   </head>
 
   <body>
-    <header class="site-header">
-      <a class="brand" href="index.html">
-        <span class="brand-mark">ن</span>
-        <span>نام سایت<span class="brand-sub"> | خدمات هوشمند</span></span>
-      </a>
-
-      <nav class="main-nav">
-        <a class="active" href="index.html">صفحه اصلی</a>
-        <a href="#services">خدمات</a>
-        <a href="#how">نحوه استفاده</a>
-      </nav>
-
-      <div class="header-actions">
-        <a class="btn btn-ghost desktop-only" href="dashboard.html">
-          پنل کاربری
-        </a>
-
-        <button class="btn btn-primary" type="button" data-open-login>
-          ورود به حساب
-        </button>
-
-        <button
-          class="menu-toggle"
-          type="button"
-          aria-label="باز کردن منو"
-          aria-expanded="false"></button>
-      </div>
-    </header>
+    <div id="header"></div>
 
     <main>
       <section class="hero container">
@@ -253,17 +226,7 @@
       </section>
     </main>
 
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <a class="brand" href="index.html">
-          <span class="brand-mark">ن</span>
-          <span>نام سایت</span>
-        </a>
-
-        <span>© ۱۴۰۵ نام سایت — نمونه اولیه پروژه آموزشی</span>
-        <a href="dashboard.html">پنل کاربری</a>
-      </div>
-    </footer>
+   
 
     <!-- پنجره ورود -->
     <div class="modal-backdrop" id="login-modal" aria-hidden="true">
@@ -331,8 +294,15 @@
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+    <div id="footer"></div>
+
     <script src="js/app.js" defer></script>
     <script src="js/login.js" defer></script>
     <script src="js/dashboard.js" defer></script>
+
+        <script src="components/header.js"></script>
+        <script src="components/footer.js"></script>
+        <script src="components/layout.js"></script>
+
   </body>
 </html>

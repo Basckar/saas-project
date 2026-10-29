@@ -7,21 +7,9 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href="index.html"
-        ><span class="brand-mark">ن</span
-        ><span>نام سایت<span class="brand-sub"> | خدمات هوشمند</span></span></a
-      >
-      <nav class="main-nav">
-        <a href="index.html">صفحه اصلی</a
-        ><a class="active" href="detail.html">جزئیات سرویس</a>
-      </nav>
-      <div class="header-actions">
-        <a class="btn btn-ghost desktop-only" href="dashboard.html"
-          >پنل کاربری</a
-        ><button class="btn btn-primary" data-open-login>ورود به حساب ←</button>
-      </div>
-    </header>
+
+<div id="header"></div>
+
     <main class="container page-container">
       <div class="breadcrumbs">
         <a href="index.html">صفحه اصلی</a><span> / </span
@@ -151,14 +139,9 @@
         </aside>
       </div>
     </main>
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <a class="brand" href="index.html"
-          ><span class="brand-mark">ن</span><span>نام سایت</span></a
-        ><span>© ۱۴۰۵ نام سایت — نمونه اولیه پروژه آموزشی</span
-        ><a href="dashboard.html">پنل کاربری</a>
-      </div>
-    </footer>
+   
+    <div id="footer"></div>
+
     <div class="modal-backdrop" id="login-modal" aria-hidden="true">
       <section
         class="login-modal"
@@ -197,5 +180,9 @@
     <script src="js/app.js" defer></script>
     <script src="js/login.js" defer></script>
     <script src="js/detail.js" defer></script>
+
+        <script src="components/header.js"></script>
+        <script src="components/footer.js"></script>
+        <script src="components/layout.js"></script>
   </body>
 </html>

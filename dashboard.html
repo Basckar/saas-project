@@ -7,19 +7,9 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body class="dashboard-body">
-    <header class="site-header">
-      <a class="brand" href="index.html"
-        ><span class="brand-mark">ن</span
-        ><span>نام سایت<span class="brand-sub"> | پنل کاربری</span></span></a
-      >
-      <nav class="main-nav">
-        <a href="index.html">صفحه اصلی</a><a href="detail.html">ثبت درخواست</a
-        ><a class="active" href="dashboard.html">پنل کاربری</a>
-      </nav>
-      <div class="header-actions">
-        <button class="btn btn-ghost" id="logout-btn">خروج از حساب</button>
-      </div>
-    </header>
+    
+    <div id="header"></div>
+
     <main class="container page-container">
       <div class="dashboard-welcome">
         <div>
@@ -86,16 +76,16 @@
         </div>
       </section>
     </main>
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <a class="brand" href="index.html"
-          ><span class="brand-mark">ن</span><span>نام سایت</span></a
-        ><span>© ۱۴۰۵ نام سایت — نمونه اولیه پروژه آموزشی</span
-        ><a href="detail.html">ثبت درخواست</a>
-      </div>
-    </footer>
+    
+    <div id="footer"></div>
+
     <div class="toast" id="toast" role="status"></div>
     <script src="js/app.js" defer></script>
     <script src="js/dashboard.js" defer></script>
+
+        <script src="components/header.js"></script>
+        <script src="components/footer.js"></script>
+        <script src="components/layout.js"></script>
+
   </body>
 </html>
