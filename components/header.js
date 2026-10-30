@@ -1,33 +1,71 @@
-function renderHeader() 
-{
+function renderHeader() {
+  const currentUser = window.Nova?.getCurrentUser?.();
+  const isLoggedIn = Boolean(currentUser?.loggedIn);
+
   return `
     <header class="site-header">
-      <a class="brand" href="index.html">
-        <span class="brand-mark">ن</span>
-        <span>نام سایت<span class="brand-sub"> | خدمات هوشمند</span></span>
-      </a>
+      <div class="container header-container">
 
-      <nav class="main-nav">
-        <a class="active" href="index.html">صفحه اصلی</a>
-        <a href="#services">خدمات</a>
-        <a href="#how">نحوه استفاده</a>
-      </nav>
-
-      <div class="header-actions">
-        <a class="btn btn-ghost desktop-only" href="dashboard.html">
-          پنل کاربری
+        <a class="brand" href="index.html">
+          <span class="brand-mark">ن</span>
+          <span class="brand-info"> 
+            <span class="brand-sub">خدمات هوشمند</span>
+          </span>
         </a>
 
-        <button class="btn btn-primary" type="button" data-open-login>
-          ورود به حساب
-        </button>
+        <nav class="main-nav" id="main-nav">
+          <a href="index.html">صفحه اصلی</a>
+          <a href="index.html#services">خدمات</a>
+          <a href="index.html#plans">تعرفه‌ها</a>
+          <a href="index.html#about">درباره ما</a>
+          <a href="index.html#contact">تماس با ما</a>
+        </nav>
+
+        <div class="header-actions">
+
+          <a
+            href="downloads/nova-app.apk"
+            class="btn btn-ghost download-app-btn"
+            download
+          > 
+            دانلود اپ
+          </a>
+
+          ${
+            isLoggedIn
+              ? `
+                <a href="dashboard.html" class="btn btn-primary">
+                  پنل کاربری
+                </a>
+              `
+              : `
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  onclick="Nova.openLogin()"
+                >
+                  ورود
+                </button>
+              `
+          }
+
+        </div>
 
         <button
           class="menu-toggle"
+          id="menu-toggle"
           type="button"
           aria-label="باز کردن منو"
-          aria-expanded="false"></button>
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
       </div>
     </header>
-`;
+  `;
 }
+
+window.renderHeader = renderHeader;

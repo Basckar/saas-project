@@ -2,90 +2,134 @@
 <html lang="fa" dir="rtl">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>پنل کاربری | نام سایت</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta
+      name="description"
+      content="پنل کاربری برای مدیریت و پیگیری درخواست‌های خدمات" />
+
+    <title>پنل کاربری</title>
+
     <link rel="stylesheet" href="css/style.css" />
   </head>
+
   <body class="dashboard-body">
-    
     <div id="header"></div>
 
     <main class="container page-container">
+      <!-- خوش‌آمدگویی و عملیات اصلی -->
       <div class="dashboard-welcome">
         <div>
           <span class="eyebrow">فضای کاربری شما</span>
-          <h1>سلام، <span id="user-name">کاربر عزیز</span></h1>
+
+          <h1>
+            سلام،
+            <span id="user-name">کاربر عزیز</span>
+          </h1>
+
           <p>
             از این بخش می‌توانید درخواست‌ها و فایل‌های مرتبط را مدیریت کنید.
           </p>
         </div>
-        <a href="detail.html" class="btn btn-primary">＋ ثبت درخواست جدید</a>
+
+        <div class="header-actions">
+          <a href="detail.html" class="btn btn-primary">
+            ＋ ثبت درخواست جدید
+          </a>
+
+          <button type="button" class="btn btn-ghost" id="logout-btn">
+            خروج از حساب
+          </button>
+        </div>
       </div>
+
+      <!-- آمار داشبورد -->
       <div class="dashboard-stats">
         <article class="stat-card">
           <div>
-            <small>کل درخواست‌ها</small><strong id="total-requests">0</strong>
+            <small>کل درخواست‌ها</small>
+            <strong id="total-requests">۰</strong>
           </div>
         </article>
+
         <article class="stat-card">
           <div>
-            <small>در انتظار بررسی</small
-            ><strong id="pending-requests">0</strong>
+            <small>در انتظار بررسی</small>
+            <strong id="pending-requests">۰</strong>
           </div>
         </article>
+
         <article class="stat-card">
-          <div><small>فایل‌های قابل دانلود</small><strong>0</strong></div>
+          <div>
+            <small>فایل‌های قابل دانلود</small>
+            <strong>۰</strong>
+          </div>
         </article>
       </div>
+
+      <!-- درخواست‌های ثبت‌شده -->
       <section class="panel-card requests-card">
         <div class="card-heading">
           <div>
             <span class="eyebrow">سوابق شما</span>
+
             <h2>درخواست‌های ثبت‌شده</h2>
+
             <p>درخواست‌هایی که در این مرورگر ثبت کرده‌اید.</p>
           </div>
-          <a href="detail.html" class="text-link">درخواست جدید ←</a>
+
+          <a href="detail.html" class="text-link"> درخواست جدید </a>
         </div>
+
         <div id="requests-list" class="requests-list"></div>
-        <div id="empty-state" class="empty-state">
+
+        <div id="empty-state" class="empty-state" hidden>
           <h3>هنوز درخواستی ثبت نکرده‌اید</h3>
+
           <p>
             با ثبت اولین درخواست، اطلاعات آن در همین قسمت نمایش داده می‌شود.
           </p>
-          <a href="detail.html" class="btn btn-primary">ثبت اولین درخواست</a>
+
+          <a href="detail.html" class="btn btn-primary"> ثبت اولین درخواست </a>
         </div>
       </section>
+
+      <!-- مرکز دانلود -->
       <section class="panel-card downloads-card">
         <div class="card-heading">
           <div>
             <span class="eyebrow">مرکز دانلود</span>
+
             <h2>فایل‌ها و ابزارها</h2>
+
             <p>
-              این قسمت برای نمایش فایل‌های اختصاصی هر سرویس در نظر گرفته شده
-              است.
+              فایل‌های اختصاصی هر سرویس پس از اتصال به API در این بخش نمایش داده
+              می‌شوند.
             </p>
           </div>
         </div>
+
         <div class="download-placeholder">
           <div>
             <b>هنوز فایلی برای شما قرار نگرفته است</b>
+
             <p>
-              پس از اتصال به API، فایل‌های مجاز در این بخش نمایش داده می‌شوند.
+              پس از اتصال به API، فایل‌های مجاز در این بخش نمایش داده خواهند شد.
             </p>
           </div>
         </div>
       </section>
     </main>
-    
+
     <div id="footer"></div>
 
-    <div class="toast" id="toast" role="status"></div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <!-- ابتدا کامپوننت‌ها و سپس فایل‌های اصلی -->
+    <script src="components/header.js" defer></script>
+    <script src="components/footer.js" defer></script>
     <script src="js/app.js" defer></script>
+    <script src="components/layout.js" defer></script>
     <script src="js/dashboard.js" defer></script>
-
-        <script src="components/header.js"></script>
-        <script src="components/footer.js"></script>
-        <script src="components/layout.js"></script>
-
   </body>
 </html>

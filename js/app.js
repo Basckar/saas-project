@@ -1,158 +1,266 @@
-"use strict";
+(function () {
+  "use strict";
 
-document.addEventListener("DOMContentLoaded", () => {
-  // عناصر پنجره ورود
-  const loginModal = document.getElementById("login-modal");
-  const loginForm = document.getElementById("login-form");
-  const toast = document.getElementById("toast");
+  const USER_KEY = "nova_user";
+  const REQUESTS_KEY = "nova_requests";
 
-  // نمایش پیام
-  function showToast(message, type = "success") {
-    if (!toast) return;
+  // خواندن امن اطلاعات از localStorage
+  function readStorage(key, fallback = null) {
+    try {
+      const value = localStorage.getItem(key);
+      return value ? JSON.parse(value) : fallback;
+    } catch (error) {
+      console.error(`خطا در خواندن ${key}:`, error);
+      return fallback;
+    }
+  }
+
+  // ذخیره امن اطلاعات در localStorage
+  function writeStorage(key, value) {
+    try {
+      localStorage.setItem(key, JSON.stringify(value));
+      return true;
+    } catch (error) {
+      console.error(`خطا در ذخیره ${key}:`, error);
+      return false;
+    }
+  }
+
+  // ساخت پیام اطلاع‌رسانی
+  function showToast(message, type = "info") {
+    let toast = document.getElementById("nova-toast");
+
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.id = "nova-toast";
+      toast.className = "toast";
+      toast.setAttribute("role", "status");
+      toast.setAttribute("aria-live", "polite");
+      document.body.appendChild(toast);
+    }
 
     toast.textContent = message;
-    toast.classList.remove("show", "success", "error");
-    toast.classList.add("show", type);
+    toast.dataset.type = type;
+    toast.classList.add("show");
 
-    window.clearTimeout(showToast.timer);
-    showToast.timer = window.setTimeout(() => {
+    clearTimeout(toast.hideTimer);
+
+    toast.hideTimer = setTimeout(() => {
       toast.classList.remove("show");
     }, 3000);
   }
 
+  // اطلاعات کاربر فعلی
+  function getCurrentUser() {
+    return readStorage(USER_KEY, null);
+  }
+
+  // بررسی وضعیت ورود
+  function isLoggedIn() {
+    const user = getCurrentUser();
+    return Boolean(user && user.loggedIn);
+  }
+
+  // ذخیره اطلاعات کاربر پس از ورود
+  function setUser(user) {
+    if (!user || !user.username) {
+      return false;
+    }
+
+    const userData = {
+      username: String(user.username),
+      name: String(user.name || user.username),
+      loggedIn: true,
+      loginAt: new Date().toISOString(),
+    };
+
+    const saved = writeStorage(USER_KEY, userData);
+
+    if (saved) {
+      // اطلاع به بخش‌های دیگر صفحه
+      window.dispatchEvent(
+        new CustomEvent("nova:auth-changed", {
+          detail: userData,
+        }),
+      );
+    }
+
+    return saved;
+  }
+
+  // خروج از حساب کاربری
+  function logout() {
+    localStorage.removeItem(USER_KEY);
+
+    window.dispatchEvent(
+      new CustomEvent("nova:auth-changed", {
+        detail: null,
+      }),
+    );
+
+    showToast("با موفقیت از حساب کاربری خارج شدید.", "success");
+
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 700);
+  }
+
   // باز کردن پنجره ورود
   function openLogin() {
-    if (!loginModal) {
-      showToast("پنجره ورود در صفحه پیدا نشد.", "error");
+    const modal = document.querySelector(".modal-backdrop");
+
+    if (!modal) {
+      window.location.href = "index.html#login";
       return;
     }
 
-    loginModal.classList.add("open");
-    loginModal.setAttribute("aria-hidden", "false");
-    document.body.classList.add("modal-open");
+    modal.classList.add("open");
+    document.body.style.overflow = "hidden";
 
-    const phoneInput = document.getElementById("login-phone");
+    const usernameInput =
+      modal.querySelector('[name="username"]') ||
+      modal.querySelector("#login-username");
 
-    if (phoneInput) {
-      window.setTimeout(() => phoneInput.focus(), 100);
+    if (usernameInput) {
+      setTimeout(() => usernameInput.focus(), 150);
     }
   }
 
   // بستن پنجره ورود
   function closeLogin() {
-    if (!loginModal) return;
+    const modal = document.querySelector(".modal-backdrop");
 
-    loginModal.classList.remove("open");
-    loginModal.setAttribute("aria-hidden", "true");
-    document.body.classList.remove("modal-open");
+    if (modal) {
+      modal.classList.remove("open");
+      document.body.style.overflow = "";
+    }
   }
 
-  // اتصال دکمه‌های ورود و خروج به رویداد کلیک
-  document.addEventListener("click", (event) => {
-    const target = event.target;
+  // ذخیره درخواست کاربر
+  function saveRequest(request) {
+    const requests = getRequests();
 
-    if (!(target instanceof Element)) return;
+    const newRequest = {
+      id: Date.now(),
+      ...request,
+      username: getCurrentUser()?.username || null,
+      createdAt: new Date().toISOString(),
+    };
 
-    if (target.closest("[data-open-login]")) {
-      event.preventDefault();
-      openLogin();
-      return;
+    requests.unshift(newRequest);
+
+    const saved = writeStorage(REQUESTS_KEY, requests);
+
+    if (saved) {
+      showToast("درخواست شما با موفقیت ثبت شد.", "success");
     }
 
-    if (target.closest("[data-close-login]")) {
-      event.preventDefault();
-      closeLogin();
-      return;
-    }
+    return saved ? newRequest : null;
+  }
 
-    // بستن پنجره با کلیک روی فضای تاریک اطراف آن
-    if (target === loginModal) {
-      closeLogin();
-    }
+  // دریافت درخواست‌ها
+  function getRequests() {
+    const requests = readStorage(REQUESTS_KEY, []);
+    return Array.isArray(requests) ? requests : [];
+  }
 
-    // منوی موبایل
-    const menuButton = target.closest(".menu-toggle");
-    if (menuButton) {
+  // کنترل منوی موبایل
+  function initMobileMenu() {
+    document.addEventListener("click", function (event) {
+      const toggle = event.target.closest("#menu-toggle");
       const nav = document.querySelector(".main-nav");
 
-      if (nav) {
-        nav.classList.toggle("open");
-        menuButton.setAttribute(
-          "aria-expanded",
-          String(nav.classList.contains("open")),
-        );
-      }
-    }
-  });
+      if (toggle && nav) {
+        const isOpen = nav.classList.toggle("show");
 
-  // بستن پنجره با کلید Escape
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      closeLogin();
-    }
-  });
-
-  // ابزار ذخیره و خواندن اطلاعات برای صفحات دیگر
-  window.Nova = {
-    showToast,
-
-    saveRequest(request) {
-      try {
-        const requests = JSON.parse(
-          localStorage.getItem("nova_requests") || "[]",
-        );
-
-        requests.unshift({
-          ...request,
-          id: Date.now(),
-          createdAt: new Date().toISOString(),
-        });
-
-        localStorage.setItem("nova_requests", JSON.stringify(requests));
-
-        return true;
-      } catch (error) {
-        console.error("خطا در ذخیره درخواست:", error);
-        showToast("ذخیره اطلاعات انجام نشد.", "error");
-        return false;
-      }
-    },
-
-    getRequests() {
-      try {
-        return JSON.parse(localStorage.getItem("nova_requests") || "[]");
-      } catch {
-        return [];
-      }
-    },
-
-    getCurrentUser() {
-      try {
-        return JSON.parse(localStorage.getItem("nova_user") || "null");
-      } catch {
-        return null;
-      }
-    },
-
-    logout() {
-      localStorage.removeItem("nova_user");
-      showToast("از حساب نمایشی خارج شدید.");
-      window.location.href = "index.html";
-    },
-  };
-
-  // جلوگیری از ارسال معمولی فرم و نمایش خطاهای واضح
-  if (loginForm) {
-    loginForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-
-      if (!loginForm.checkValidity()) {
-        loginForm.reportValidity();
+        toggle.setAttribute("aria-expanded", String(isOpen));
         return;
       }
 
-      // پردازش ورود در فایل login.js انجام می‌شود.
-      // اینجا فقط جلوی رفرش ناخواسته صفحه گرفته می‌شود.
+      // بستن منو با انتخاب لینک
+      const navLink = event.target.closest(".main-nav a");
+
+      if (navLink && nav) {
+        nav.classList.remove("show");
+
+        const menuButton = document.getElementById("menu-toggle");
+        if (menuButton) {
+          menuButton.setAttribute("aria-expanded", "false");
+        }
+      }
+    });
+
+    // بستن منو با کلیک بیرون آن
+    document.addEventListener("click", function (event) {
+      const nav = document.querySelector(".main-nav");
+      const toggle = document.getElementById("menu-toggle");
+
+      if (!nav || !toggle) return;
+
+      if (!nav.contains(event.target) && !toggle.contains(event.target)) {
+        nav.classList.remove("show");
+        toggle.setAttribute("aria-expanded", "false");
+      }
     });
   }
-});
+
+  // کنترل بستن پنجره ورود
+  function initLoginModal() {
+    document.addEventListener("click", function (event) {
+      const closeButton = event.target.closest(
+        ".modal-close, [data-close-login]",
+      );
+
+      if (closeButton) {
+        closeLogin();
+        return;
+      }
+
+      const backdrop = event.target.closest(".modal-backdrop");
+
+      if (backdrop && event.target === backdrop) {
+        closeLogin();
+      }
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        closeLogin();
+      }
+    });
+  }
+
+  // جلوگیری از ورود به پنل بدون ورود
+  function protectDashboard() {
+    const isDashboard = window.location.pathname.endsWith("dashboard.html");
+
+    if (isDashboard && !isLoggedIn()) {
+      window.location.replace("index.html#login");
+    }
+  }
+
+  // API عمومی پروژه
+  window.Nova = {
+    showToast,
+    getCurrentUser,
+    isLoggedIn,
+    setUser,
+    logout,
+    openLogin,
+    closeLogin,
+    saveRequest,
+    getRequests,
+  };
+
+  // راه‌اندازی بخش‌های عمومی
+  document.addEventListener("DOMContentLoaded", function () {
+    initMobileMenu();
+    initLoginModal();
+    protectDashboard();
+
+    // باز شدن خودکار پنجره ورود با آدرس #login
+    if (window.location.hash === "#login") {
+      openLogin();
+    }
+  });
+})();
