@@ -1,27 +1,26 @@
-"use strict";
+(function () {
+  "use strict";
 
-document.addEventListener("DOMContentLoaded", function () {
-  const header = document.getElementById("header");
-  const footer = document.getElementById("footer");
+  function renderLayout() {
+    const headerElement = document.getElementById("site-header");
+    const footerElement = document.getElementById("site-footer");
 
-  if (header && typeof window.renderHeader === "function") {
-    header.innerHTML = window.renderHeader();
-  }
-
-  if (footer && typeof window.renderFooter === "function") {
-    footer.innerHTML = window.renderFooter();
-  }
-
-  // مشخص کردن صفحه فعال در منو
-  const currentPage = window.location.pathname.split("/").pop() || "index.html";
-
-  document.querySelectorAll(".main-nav a[data-page]").forEach((link) => {
-    if (link.dataset.page === currentPage) {
-      link.classList.add("active");
-      link.setAttribute("aria-current", "page");
-    } else {
-      link.classList.remove("active");
-      link.removeAttribute("aria-current");
+    // نمایش هدر مشترک
+    if (headerElement && typeof window.renderHeader === "function") {
+      headerElement.innerHTML = window.renderHeader();
     }
-  });
-});
+
+    // نمایش فوتر مشترک
+    if (footerElement && typeof window.renderFooter === "function") {
+      footerElement.innerHTML = window.renderFooter();
+    }
+  }
+
+  // اجرای ساختار مشترک بعد از بارگذاری صفحه
+  document.addEventListener("DOMContentLoaded", renderLayout);
+
+  // امکان اجرای مجدد در صورت نیاز
+  window.NovaLayout = {
+    render: renderLayout,
+  };
+})();
