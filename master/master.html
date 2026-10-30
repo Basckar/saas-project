@@ -1,33 +1,64 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="سامانه خدمات هوشمند نوا">
+    
+    <title>نوا | خدمات هوشمند</title>
 
-    <title>نوا | قالب اصلی</title>
-
-    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/master.css">
   </head>
 
+  <div class="modal-backdrop" id="login-modal"
+     style="display: none;">
+  <div class="login-modal" role="dialog"
+       aria-modal="true" aria-label="ورود به حساب">
+
+    <button type="button" class="modal-close"
+            data-close-login>×</button>
+
+    <h2>ورود به حساب کاربری</h2>
+
+    <form id="login-form">
+      <input type="text" name="username"
+             id="login-username"
+             placeholder="نام کاربری" required>
+
+      <input type="password" name="password"
+             id="login-password"
+             placeholder="رمز عبور" required>
+
+      <input type="text" name="token"
+             id="login-token"
+             placeholder="توکن" required>
+
+      <button type="submit" class="btn btn-primary">
+        ورود
+      </button>
+    </form>
+  </div>
+</div>
+
   <body>
-    <!-- هدر مشترک -->
+    <!--  Master page:اجزای مشترک تمام صفحات در این فایل قرار دارند. -->
     <div id="site-header"></div>
 
     <!-- محتوای اصلی صفحات -->
-    <main id="master-content">
-      <section class="container">
-        <h1>قالب اصلی نوا</h1>
-        <p>ساختار مشترک صفحات سامانه خدمات هوشمند نوا</p>
-      </section>
+    <main id="page-content" class="nova-page-content" tabindex="-1">
+      <div class="nova-loading">در حال بارگذاری صفحه...</div>
     </main>
 
     <!-- فوتر مشترک -->
     <div id="site-footer"></div>
 
-    <!-- ترتیب بارگذاری فایل‌ها مهم است -->
-    <script src="../js/app.js" defer></script>
+    <!-- ترتیب بارگذاری فایل‌ها مهم است:ابتدا اجزا، سپس کنترل کننده Master Page -->
     <script src="../components/header.js" defer></script>
     <script src="../components/footer.js" defer></script>
-    <script src="../components/layout.js" defer></script>
+    <script src="../js/master.js" defer></script>
+        <script src="../js/app.js" defer></script>
+    <script src="../js/login.js" defer></script>
+
   </body>
 </html>

@@ -1,0 +1,418 @@
+:root {
+  --nova-primary: #6d4aff;
+  --nova-primary-dark: #5133d4;
+  --nova-text: #202238;
+  --nova-muted: #73758b;
+  --nova-border: #e9e8f1;
+  --nova-surface: #ffffff;
+  --nova-bg: #f7f7fc;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: var(--nova-text);
+  background: var(--nova-bg);
+  font-family: Tahoma, Arial, sans-serif;
+  line-height: 1.8;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.nova-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,.96);
+  border-bottom: 1px solid var(--nova-border);
+  backdrop-filter: blur(12px);
+}
+
+.nova-header-inner {
+  max-width: 1200px;
+  min-height: 78px;
+  margin: auto;
+  padding: 12px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.nova-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.nova-brand-mark {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  color: white;
+  font-size: 23px;
+  font-weight: 800;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #8b6cff, #5635d9);
+}
+
+.nova-brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.4;
+}
+
+.nova-brand-text strong {
+  font-size: 18px;
+}
+
+.nova-brand-text small {
+  color: var(--nova-muted);
+  font-size: 11px;
+}
+
+.nova-nav {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.nova-nav a {
+  color: #55566d;
+  font-size: 13px;
+  transition: color .2s;
+}
+
+.nova-nav a:hover,
+.nova-nav a.active {
+  color: var(--nova-primary);
+}
+
+.nova-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nova-btn {
+  border: 0;
+  border-radius: 11px;
+  padding: 10px 17px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.nova-btn-primary {
+  color: white;
+  background: var(--nova-primary);
+}
+
+.nova-btn-primary:hover {
+  background: var(--nova-primary-dark);
+  transform: translateY(-1px);
+}
+
+.nova-btn-light {
+  color: var(--nova-primary);
+  background: #f0edff;
+}
+
+.nova-menu-toggle {
+  display: none;
+  border: 1px solid var(--nova-border);
+  background: white;
+  border-radius: 9px;
+  padding: 9px;
+}
+
+.nova-menu-toggle span {
+  display: block;
+  width: 21px;
+  height: 2px;
+  margin: 4px;
+  background: var(--nova-text);
+}
+
+.nova-page-content {
+  min-height: 65vh;
+}
+
+.nova-section {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 64px 22px;
+}
+
+.nova-hero {
+  display: grid;
+  grid-template-columns: 1.3fr .7fr;
+  align-items: center;
+  gap: 45px;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.nova-eyebrow {
+  color: var(--nova-primary);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.nova-hero h1,
+.nova-section h1 {
+  margin: 10px 0 14px;
+  font-size: clamp(27px, 4vw, 42px);
+  line-height: 1.5;
+}
+
+.nova-hero-copy p,
+.nova-section > p {
+  color: var(--nova-muted);
+  max-width: 720px;
+}
+
+.nova-hero-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+
+.nova-hero-panel,
+.nova-card {
+  background: var(--nova-surface);
+  border: 1px solid var(--nova-border);
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 12px 35px rgba(40,35,90,.045);
+}
+
+.nova-hero-panel {
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.nova-panel-icon {
+  width: 55px;
+  height: 55px;
+  display: grid;
+  place-items: center;
+  border-radius: 17px;
+  color: white;
+  background: var(--nova-primary);
+  font-size: 27px;
+  margin-bottom: 17px;
+}
+
+.nova-section-heading {
+  margin-bottom: 22px;
+}
+
+.nova-section h2 {
+  margin: 5px 0;
+  font-size: 27px;
+}
+
+.nova-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 18px;
+  margin-top: 25px;
+}
+
+.nova-card h3 {
+  margin-top: 0;
+}
+
+.nova-card p {
+  color: var(--nova-muted);
+}
+
+.nova-card a,
+.nova-text-button {
+  color: var(--nova-primary);
+  font: inherit;
+  font-size: 13px;
+  border: 0;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.nova-card-featured {
+  border-color: #c9bcff;
+  box-shadow: 0 12px 35px rgba(109,74,255,.1);
+}
+
+.nova-price {
+  color: var(--nova-primary);
+  font-size: 20px;
+}
+
+.nova-footer {
+  background: #202238;
+  color: white;
+}
+
+.nova-footer-inner {
+  max-width: 1120px;
+  margin: auto;
+  padding: 35px 22px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px 35px;
+}
+
+.nova-footer p,
+.nova-footer small {
+  color: #c2c2d1;
+}
+
+.nova-footer-links {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.nova-footer-links a {
+  color: #e5e3f3;
+  font-size: 13px;
+}
+
+.nova-footer small {
+  grid-column: 1 / -1;
+}
+
+.nova-loading {
+  max-width: 1120px;
+  margin: 50px auto;
+  padding: 20px;
+  color: var(--nova-muted);
+}
+
+@media (max-width: 900px) {
+
+  .nova-header-inner {
+    gap: 12px;
+  }
+
+  .nova-nav {
+    gap: 12px;
+  }
+
+  .nova-nav a {
+    font-size: 12px;
+  }
+
+}
+
+@media (max-width: 720px) {
+
+  .nova-header-inner {
+    flex-wrap: wrap;
+  }
+
+  .nova-menu-toggle {
+    display: block;
+    order: 2;
+    margin-right: auto;
+  }
+
+  .nova-header-actions {
+    order: 3;
+  }
+
+  .nova-nav {
+    display: none;
+    order: 4;
+    flex-basis: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 8px 0;
+  }
+
+  .nova-nav.open {
+    display: flex;
+  }
+
+  .nova-nav a {
+    padding: 10px 5px;
+    border-top: 1px solid var(--nova-border);
+  }
+
+  .nova-hero {
+    grid-template-columns: 1fr;
+    padding-top: 45px;
+    padding-bottom: 45px;
+  }
+
+  .nova-card-grid {
+    grid-template-columns: 1fr;
+}
+
+  .nova-footer-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .nova-footer small {
+    grid-column: auto;
+  }
+  .modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-modal {
+  position: relative;
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  width: min(90%, 400px);
+  direction: rtl;
+}
+
+.login-modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.login-modal input {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  cursor: pointer;
+}
+}

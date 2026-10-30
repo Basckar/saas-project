@@ -14,11 +14,11 @@ function renderHeader() {
         </a>
 
         <nav class="main-nav" id="main-nav">
-          <a href="index.html">صفحه اصلی</a>
-          <a href="index.html#services">خدمات</a>
-          <a href="index.html#plans">تعرفه‌ها</a>
-          <a href="index.html#about">درباره ما</a>
-          <a href="index.html#contact">تماس با ما</a>
+          <a href="#home">صفحه اصلی</a>
+          <a href="#services">خدمات</a>
+          <a href="#plans">تعرفه‌ها</a>
+          <a href="#about">درباره ما</a>
+          <a href="#contact">تماس با ما</a>
         </nav>
 
         <div class="header-actions">
@@ -42,13 +42,9 @@ function renderHeader() {
                 <button
                   type="button"
                   class="btn btn-primary"
-                  onclick="Nova.openLogin()"
-                >
-                  ورود
-                </button>
+                  onclick="Nova.openLogin()">ورود</button>
               `
           }
-
         </div>
 
         <button
@@ -62,8 +58,9 @@ function renderHeader() {
           <span></span>
           <span></span>
         </button>
-
+  
       </div>
+      
     </header>
   `;
 }

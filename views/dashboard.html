@@ -1,0 +1,16 @@
+<section class="nova-section">
+    <span class="nova-eyebrow">فضای اختصاصی</span>
+    <h1>پنل کاربری</h1>
+
+    <div class="nova-card">
+        <p>خوش آمدید، <strong id="nova-user-name"></strong></p>
+        <p>این یک پنل نمایشی برای نشان دادن اشتراک محتوای صفحات در Master Page است.</p>
+
+        <button class="nova-btn nova-btn-primary" type="button" data-action="logout">خروج از حساب نمایشی</button>
+    </div>
+</section>
+
+<script>
+    document.getElementById("nova-user-name").textContent =
+    localStorage.getItem("nova_demo_user") ||"کاربر مهمان" ;
+</script>

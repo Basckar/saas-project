@@ -115,6 +115,7 @@
     }
 
     modal.classList.add("open");
+    modal.style.display = "flex";
     document.body.style.overflow = "hidden";
 
     const usernameInput =
@@ -129,6 +130,7 @@
   // بستن پنجره ورود
   function closeLogin() {
     const modal = document.querySelector(".modal-backdrop");
+    modal.style.display = "none";
 
     if (modal) {
       modal.classList.remove("open");

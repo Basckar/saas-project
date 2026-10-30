@@ -1,24 +1,24 @@
-"use strict";
+(function () { 
+  "use strict"; 
+  function renderFooter() { 
+  return  `
+  <footer class="nova-footer"> 
+  <div class="nova-footer-inner"> 
+  
+      <div> 
+      <strong>نوا | خدمات هوشمند</strong>
+      <p>راهکاری ساده برای دسترسی و مدیریت خدمات آنلاین.</p> 
+      </div> 
 
-window.renderFooter = function renderFooter() {
-  return `
-    <footer class="site-footer">
-      <div class="container footer-inner">
+      <div class="nova-footer-links"> 
+      <a href="#home" data-page="home">صفحه اصلی</a>
+      <a href="#services" data-page="services">خدمات</a>
+      <a href="#contact" data-page="contact">تماس با ما</a> 
+      </div>  
 
-        <a class="brand" href="index.html">
-          <span class="brand-mark">ن</span>
-          <span>    خدمات هوشمند</span>
-        </a>
-
-        <span>
-          © ۱۴۰۵   — تمامی حقوق محفوظ است.
-        </span>
-
-        <a href="dashboard.html">
-          پنل کاربری
-        </a>
-
-      </div>
-    </footer>
-  `;
-};
+      <small>© تمامی حقوق برای سامانه نوا محفوظ است.</small>
+  </div> 
+  </footer> 
+`; } 
+window.renderFooter = renderFooter; 
+})();
